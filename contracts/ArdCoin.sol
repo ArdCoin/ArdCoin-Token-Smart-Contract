@@ -1,12 +1,10 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.19;
 
-import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Burnable.sol";
 import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Snapshot.sol";
 import "@openzeppelin/contracts/access/AccessControl.sol";
 import "@openzeppelin/contracts/security/Pausable.sol";
-import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Permit.sol";
 import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Votes.sol";
 
 /// @notice ArdCoin ERC20 Token
@@ -16,7 +14,7 @@ import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Votes.sol";
 /// @notice Admin of contract will be a Multisignature Wallet
 /// @dev Standard ERC20 Smart Contract with OpenZeppelin Presets
 /// @author mnkhod.dev
-contract ArdCoin is ERC20, ERC20Burnable, ERC20Snapshot, AccessControl, Pausable, ERC20Permit, ERC20Votes {
+contract ArdCoin is ERC20Burnable, ERC20Snapshot, AccessControl, Pausable, ERC20Votes {
 
     /// @notice Smart Contract Feature Roles
     /// @dev Every feature has its own roles for versatility and responsibility scoping in mind 
