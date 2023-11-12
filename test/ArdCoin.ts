@@ -147,6 +147,9 @@ describe("ArdCoin Tests", function() {
 
       await expect(token.transfer(account2.address,ethers.parseEther("5"))).to.be.revertedWith(`Pausable: paused`);
 
+      await expect(token.connect(account2).unpause()).to.be.revertedWith(
+        `AccessControl: account ${account2.address.toLowerCase()} is missing role ${await token.PAUSER_ROLE()}`
+      );
       await token.unpause()
       expect(await token.paused()).to.equal(false);
     });
@@ -168,6 +171,29 @@ describe("ArdCoin Tests", function() {
 
       expect(await token.balanceOf(account2.address)).to.equal(ethers.parseEther("10"));
       expect(await token.balanceOfAt(account2.address,id)).to.equal(ethers.parseEther("0"));
+    });
+
+    it("Checking OnlyRole SNAPSHOT_ROLE",async function(){
+      const { token , account2 } = await loadFixture(deployArdCoin);
+
+      await token.snapshot()
+      await token.mint(account2.address, ethers.parseEther("10"))
+      await expect(token.connect(account2).getCurrentSnapshot()).to.be.revertedWith(
+        `AccessControl: account ${account2.address.toLowerCase()} is missing role ${await token.SNAPSHOT_ROLE()}`
+      );
+
+    })
+  })
+
+  describe("Checking Constants", function() {
+
+    it("Checking Role Constants", async function() {
+      const { token } = await loadFixture(deployArdCoin);
+
+      expect(await token.SNAPSHOT_ROLE()).to.equal(ethers.keccak256(ethers.toUtf8Bytes("SNAPSHOT_ROLE")));
+      expect(await token.PAUSER_ROLE()).to.equal(ethers.keccak256(ethers.toUtf8Bytes("PAUSER_ROLE")));
+      expect(await token.BLACKLIST_ROLE()).to.equal(ethers.keccak256(ethers.toUtf8Bytes("BLACKLIST_ROLE")));
+      expect(await token.MINTER_ROLE()).to.equal(ethers.keccak256(ethers.toUtf8Bytes("MINTER_ROLE")));
     });
   })
 
