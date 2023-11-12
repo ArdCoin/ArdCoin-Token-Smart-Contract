@@ -14,7 +14,7 @@ import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Votes.sol";
 /// @notice Admin of contract will be a Multisignature Wallet
 /// @dev Standard ERC20 Smart Contract with OpenZeppelin Presets
 /// @author mnkhod.dev
-contract ArdCoin is ERC20Burnable, ERC20Snapshot, AccessControl, Pausable, ERC20Votes {
+contract ArdCoin is AccessControl,Pausable,ERC20Burnable,ERC20Snapshot,ERC20Votes {
 
     /// @notice Blacklist Feature Event
     /// @dev Event will be updated everytime _blacklist private variable has been updated
