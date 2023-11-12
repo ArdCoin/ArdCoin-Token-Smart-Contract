@@ -16,6 +16,10 @@ import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Votes.sol";
 /// @author mnkhod.dev
 contract ArdCoin is ERC20Burnable, ERC20Snapshot, AccessControl, Pausable, ERC20Votes {
 
+    /// @notice Blacklist Feature Event
+    /// @dev Event will be updated everytime _blacklist private variable has been updated
+    event BlacklistUpdate(address indexed user, bool state);
+
     /// @notice Smart Contract Feature Roles
     /// @dev Every feature has its own roles for versatility and responsibility scoping in mind 
     bytes32 public constant SNAPSHOT_ROLE = keccak256("SNAPSHOT_ROLE");
@@ -49,6 +53,7 @@ contract ArdCoin is ERC20Burnable, ERC20Snapshot, AccessControl, Pausable, ERC20
     /// @dev Setting an address as true boolean state means the address will be blacklisted
     function blackListUpdate(address user, bool value) public virtual onlyRole(BLACKLIST_ROLE) {
         _blacklist[user] = value;
+        emit BlacklistUpdate(user,value);
     }
 
     /// @notice OpenZeppelin ERC20Snapshot Preset function
