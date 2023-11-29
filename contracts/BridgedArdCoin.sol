@@ -7,14 +7,14 @@ import "@openzeppelin/contracts/access/AccessControl.sol";
 import "@openzeppelin/contracts/security/Pausable.sol";
 import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Votes.sol";
 
-/// @notice ArdCoin 3.0 ERC20 Token
+/// @notice ArdCoin ERC20 Token
 /// @notice Token Smart Contract has been written with centralized/versatile controls in mind
 /// @notice Token Smart Contract has "Access Control System" to have an architecture of having other smart contracts as extended business logic
 /// @notice Access Control System adds more clear authorization and versatility than Ownership Model
 /// @notice Admin of contract will be a Multisignature Wallet
 /// @dev Standard ERC20 Smart Contract with OpenZeppelin Presets
 /// @author mnkhod.dev
-contract ArdCoin is AccessControl,Pausable,ERC20Burnable,ERC20Snapshot,ERC20Votes {
+contract BridgedArdCoin is AccessControl,Pausable,ERC20Burnable,ERC20Snapshot,ERC20Votes {
 
     /// @notice Blacklist Feature Event
     /// @dev Event will be updated everytime _blacklist private variable has been updated
